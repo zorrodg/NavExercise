@@ -34,5 +34,5 @@ Files
 API
 ------------
 
-* GET /api/nav - returns a JSON responsve representing the items in the nav.
+* GET /api/nav - returns a JSON response representing the items in the nav.
 
