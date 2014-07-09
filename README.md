@@ -29,5 +29,10 @@ Files
 -----------
 
 * Mockup - Illustrator file describing how the nav should behave
-* Assets - folder containing any images or assets the project will need (i.e. hamburger icon)
+* server.js - node.js server that will host the site and provie the api to construct the nav
+
+API
+------------
+
+* GET /api/nav - returns a JSON responsve representing the items in the nav.
 
