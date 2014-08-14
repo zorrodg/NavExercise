@@ -64,6 +64,28 @@
          ]
       },
       {
+         "label":"Ideas",
+         "url":"#/ideas",
+         "items":[
+            {
+               "label":"Reports",
+               "url":"#/ideas/reports"
+            },
+            {
+               "label":"Perspectives",
+               "url":"#/ideas/perspectives"
+            },
+            {
+               "label":"Books",
+               "url":"#/ideas/books"
+            },
+            {
+               "label":"Videos",
+               "url":"#/ideas/videos"
+            }
+         ]
+      },
+      {
          "label":"News",
          "url":"#/news",
          "items":[
