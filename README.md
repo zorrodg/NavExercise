@@ -6,9 +6,14 @@ This exercise will have the candidate build a responsive site navigation driven 
 
 Here are the guidelines for this exercise
 
-* No frameworks.
+* No frameworks or libraries (this means jquery).
 * Chrome compliance is all that's required, all functions and features available in Chrome are in play.
 * Nav must be responsive.
+* Code must run after the following command, please ensure your code runs as you expect it to from a fresh checkout with these commands before submission.
+
+```
+$ npm i && npm start
+```
 
 Nice to haves:
 
