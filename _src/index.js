@@ -1,4 +1,10 @@
+/**
+ * HUGE test
+ * @author Andrés Zorro <zorrodg@gmail.com>
+ */
 'use strict';
-let a = '123';
 
-alert('Hello world' + a);
+let a = document.querySelector('h1');
+
+a.innerHTML = 'Hello Zorro!';
+
