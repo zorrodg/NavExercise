@@ -16,10 +16,20 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www"
+    "start": "npm run compile && node ./bin/www",
+
+    "watch": "npm run watch-js & node ./bin/www",
+    "watch-js": "./node_modules/.bin/watchify _src/index.js -o public/bundle.js -dv",
+    "compile": "./node_modules/.bin/browserify _src/index.js > public/bundle.js"
   },
   "dependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.3",
     "express": "~4.2.0",
-    "morgan": "~1.0.0"
+    "morgan": "~1.0.0",
+    "watchify": "^3.2.1"
+  },
+  "browserify": {
+    "transform": [ "babelify" ] 
   }
 }
