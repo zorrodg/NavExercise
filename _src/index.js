@@ -4,7 +4,10 @@
  */
 'use strict';
 
-let a = document.querySelector('h1');
+import qs from './helpers/editcss';
+import ajax from './helpers/ajax';
+
+let a = qs('h1');
 
 a.innerHTML = 'Hello Zorro!';
 
