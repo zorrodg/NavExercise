@@ -16,15 +16,18 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run compile && node ./bin/www",
-    "watch": "npm run watch-js & node ./bin/www",
+    "start": "npm run compile-js & npm run compile-css && node ./bin/www",
+    "watch": "npm run watch-js & npm run watch-css & node ./bin/www",
     "watch-js": "./node_modules/.bin/watchify _src/index.js -o public/bundle.js -dv",
-    "compile": "./node_modules/.bin/browserify _src/index.js > public/bundle.js"
+    "compile-js": "./node_modules/.bin/browserify _src/index.js > public/bundle.js",
+    "watch-css": "./node_modules/.bin/nodemon --exec \"npm run compile-css\" --watch _src -e less -q",
+    "compile-css": "./node_modules/.bin/lessc _src/index.less public/bundle.css"
   },
   "dependencies": {
     "babelify": "^6.1.2",
     "browserify": "^10.2.3",
     "express": "~4.2.0",
+    "less": "^2.5.1",
     "morgan": "~1.0.0"
   },
   "browserify": {
@@ -33,7 +36,7 @@
     ]
   },
   "devDependencies": {
-    "watch-less": "0.0.4",
+    "nodemon": "^1.3.7",
     "watchify": "^3.2.1"
   }
 }

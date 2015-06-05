@@ -31,3 +31,4 @@ node_modules
 .lock-wscript
 
 public/bundle.js
+public/bundle.css
