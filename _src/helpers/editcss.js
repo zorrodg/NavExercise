@@ -11,23 +11,27 @@ class EditCSS {
     this.$ = selector;
   }
 
+  /**
+   * Adds a new class to the element className string
+   * @param {...spread} classNames classes to add
+   */
   addClass(...classNames) {
-    let classes, i, len, item;
-
     for (let i = 0, len = this.$.length; i < len; i++) {
-      item = this.$[i];
-      classes = item.className.split(' ');
+      let item = this.$[i],
+          classes = item.className.split(' ');
       classes = classes.concat(classNames);
       item.className = u.unique(classes).join(' ').trim();
     }
   }
 
+  /**
+   * Removes a new class to the element className string
+   * @param {...spread} classNames classes to remove
+   */
   removeClass(...classNames) {
-    let classes, i, len, item;
-
     for (let i = 0, len = this.$.length; i < len; i++) {
-      item = this.$[i];
-      classes = item.className.split(' ');
+      let item = this.$[i],
+          classes = item.className.split(' ');
       classes = classes.filter(it => classNames.indexOf(it) < 0);
       item.className = u.unique(classes).join(' ').trim();
     }

@@ -30,7 +30,7 @@ describe('EditCSS Helper test', () => {
       $el = editcss('.test-elm');
 
       $el.addClass('test-class', 'other-class');
-    })
+    });
 
     it('$el should exist', () => assert($el.$.length > 0));
     it('$el a should have "test-class" and "other-class"', () => {
