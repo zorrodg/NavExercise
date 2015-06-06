@@ -7,7 +7,12 @@
 import qs from './helpers/editcss';
 import ajax from './helpers/ajax';
 
-let a = qs('h1');
+document.addEventListener("DOMContentLoaded", init);
 
-a.innerHTML = 'Hello Zorro!';
-
+function init() {
+  ajax('api/nav.json')
+      .then(res => res.data)
+      .then(data => {
+        console.log('data', data);
+      });
+}

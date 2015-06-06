@@ -1,8 +1,54 @@
-@import "styles/vars.less";
+@import 'styles/fonts.less';
+@import 'styles/vars.less';
 
 html, body {
-  color: @light-gray;
+  margin: 0;
+  font-size: 12px;
+}
+
+.main {
   h1 {
-    font: @d-secondary-nav;
+    font: @headline;
+    margin: ~"calc(4rem + 2px)" 0;
+    br {
+      display: none;
+    }
+  }
+
+  &-img {
+    img {
+      background: url('/images/background-image.jpg') center top no-repeat;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &-body {
+    font: @body;
+    padding: 0 2rem;
+    max-width: 968px;
+    margin:  5rem auto; 
+  }
+
+  @media @desktop {
+    h1 {
+      margin: 0;
+      position: absolute;
+      top: 32vw;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 5.4em;
+      line-height: 1;
+      letter-spacing: -3px;
+      white-space: nowrap;
+
+      br {
+        display: block;
+      }
+    }
   }
 }
+
+@import 'styles/nav.less';

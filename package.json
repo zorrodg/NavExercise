@@ -15,11 +15,12 @@
   },
   "private": true,
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers js:mocha-traceur _test",
-    "start": "npm run compile-js & npm run compile-css && node ./bin/www",
-    "watch": "npm run watch-js & npm run watch-css & node ./bin/www",
+    "start": "npm run compile-js & npm run compile-tests & npm run compile-css && node ./bin/www",
+    "watch": "npm run watch-js & npm run watch-css & npm run watch-tests & node ./bin/www",
     "watch-js": "./node_modules/.bin/watchify _src/index.js -o public/bundle.js -dv",
+    "watch-tests": "./node_modules/.bin/watchify _test/index.js -o public/test/tests.js -dv",
     "compile-js": "./node_modules/.bin/browserify _src/index.js > public/bundle.js",
+    "compile-tests": "./node_modules/.bin/browserify -d _test/index.js > public/test/tests.js",
     "watch-css": "./node_modules/.bin/nodemon --exec \"npm run compile-css\" --watch _src -e less -q",
     "compile-css": "./node_modules/.bin/lessc _src/index.less public/bundle.css"
   },
@@ -31,11 +32,11 @@
     "morgan": "~1.0.0"
   },
   "browserify": {
-    "transform": [
-      "babelify"
-    ]
+    "transform": [["babelify", { "plugins": ["object-assign"] }]]
   },
   "devDependencies": {
+    "babel-core": "^5.5.4",
+    "babel-plugin-object-assign": "^1.1.0",
     "jsdom": "^5.4.3",
     "mocha": "^2.2.5",
     "mocha-traceur": "^2.1.0",
