@@ -3,7 +3,7 @@
 import assert from 'assert';
 import ajax from './../_src/helpers/ajax';
 
-describe('Ajax Helper test', () => {
+describe('Ajax Helper', () => {
   let call;
 
   // Creation Tests

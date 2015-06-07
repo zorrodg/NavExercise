@@ -12,7 +12,7 @@ export default function(opts = {}) {
     if (typeof opts === 'string') {
       opts = {
         url: opts
-      }
+      };
     }
 
     // No AJAX without URL
@@ -70,7 +70,7 @@ export default function(opts = {}) {
               data: JSON.parse(req.responseText),
               status: req.status,
               config: Object.assign({}, opts)
-            })
+            });
           } else {
             reject({
               error: req.responseText,
@@ -84,7 +84,7 @@ export default function(opts = {}) {
             error: e,
             status: req.status,
             config: Object.assign({}, opts)
-          })
+          });
         }  
       }
     }

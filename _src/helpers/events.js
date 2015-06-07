@@ -1,5 +1,5 @@
 /**
- * Basic Event Listener support (Only )
+ * Basic Event Listener support
  * @author Andrés Zorro <zorrodg@gmail.com>
  */
 'use strict';
@@ -7,6 +7,7 @@
 import * as u from './utils';
 
 class EventRegister {
+
   constructor (selector) {
     this.events = {};
     this.$ = selector;
@@ -16,15 +17,16 @@ class EventRegister {
    * Adds an event listener
    * @param  {string}   evt      Event name
    * @param  {Function} callback callback to execute
+   * @param  {boolean} capture   event capture
    */
-  on(evt, callback) {
+  on(evt, callback, capture = false) {
     if (!u.contains(Object.keys(this.events), evt)) {
       this.events[evt] = callback;
     }
 
     for (let i = 0, len = this.$.length; i < len; i++) {
       let item = this.$[i];
-      item.addEventListener(evt, this.events[evt]);
+      item.addEventListener(evt, this.events[evt], capture);
     }
   }
 
@@ -48,13 +50,12 @@ class EventRegister {
    * @param  {string}   evt      Event name
    */
   trigger(evt) {
+
     if (u.contains(Object.keys(this.events), evt)) {
       for (let i = 0, len = this.$.length; i < len; i++) {
         let item = this.$[i],
-            evtDispatcher = document.createEvent('MouseEvents');
+            evtDispatcher = new Event(evt);
 
-        evtDispatcher.initEvent(evt, true ,true);
-        console.log(evtDispatcher);
         item.dispatchEvent(evtDispatcher);
       }
     }

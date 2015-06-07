@@ -36,6 +36,23 @@ class EditCSS {
       item.className = u.unique(classes).join(' ').trim();
     }
   }
+
+  /**
+   * Check whether given elm has class
+   * @param  {string}  className Name of the class
+   * @return {Boolean}           true if found
+   */
+  hasClass(className) {
+    for (let i = 0, len = this.$.length; i < len; i++) {
+      let item = this.$[i],
+          classes = item.className.split(' ');
+      if (u.contains(classes, className)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
 
 export default function(selector) {

@@ -3,7 +3,7 @@
 import assert from 'assert';
 import ev from './../_src/helpers/events';
 
-describe('Events', () => {
+describe('Events helper', () => {
   describe('Init', () => {
     it('Should be a function', () => assert.equal(typeof ev, 'function'));
     it('Should be an object', () => assert(ev('body') instanceof Object));
@@ -36,8 +36,7 @@ describe('Events', () => {
         done();
       });
 
-      clickEvent = document.createEvent('MouseEvents');
-      clickEvent.initEvent('click', true ,true);
+      clickEvent = new Event('click');
 
       document.querySelector('.test-elm').dispatchEvent(clickEvent);
     });
@@ -79,8 +78,7 @@ describe('Events', () => {
 
       $el.off('click');
 
-      clickEvent = document.createEvent('MouseEvents');
-      clickEvent.initEvent('click', true ,true);
+      clickEvent = new Event('click');
 
       document.querySelector('.test-elm').dispatchEvent(clickEvent);
 

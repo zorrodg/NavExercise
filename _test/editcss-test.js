@@ -3,7 +3,7 @@
 import assert from 'assert';
 import editcss from './../_src/helpers/editcss';
 
-describe('EditCSS Helper test', () => {
+describe('EditCSS Helper', () => {
 
   describe('Init', () => {
     it('Should be a function', () => assert.equal(typeof editcss, 'function'));
@@ -82,6 +82,40 @@ describe('EditCSS Helper test', () => {
     it('$el c should have "test-class" only', () => {
       assert.equal($el.$[0].className, 'test-elm test-class')
     });
+
+    after(() => {
+      document.body.removeChild(a);
+      document.body.removeChild(b);
+      document.body.removeChild(c);
+    });
+
+  });
+
+  describe('Has Class Method', () => {
+    let a, b, c, $el;
+
+    before(() => {
+      a = document.createElement('span');
+      b = document.createElement('div');
+      c = document.createElement('a');
+      a.className = 'test-elm test-class other-class';
+      b.className = 'test-elm test-class other-class';
+      c.className = 'test-elm test-class other-class';
+      document.body.appendChild(a);
+      document.body.appendChild(b);
+      document.body.appendChild(c);
+      $el = editcss('.test-elm');
+    })
+
+    it('$el should exist', () => assert($el.$.length > 0));
+    it('$el should have "test-class"', () => {
+      assert.equal($el.hasClass('test-elm'), true)
+    });
+
+    it('$el should not have "test-other-class"', () => {
+      assert.equal($el.hasClass('test-other-class'), false)
+    });
+
 
     after(() => {
       document.body.removeChild(a);

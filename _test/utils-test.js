@@ -3,7 +3,7 @@
 import assert from 'assert';
 import * as u from './../_src/helpers/utils';
 
-describe('Utils Testing', () => {
+describe('Utils helper', () => {
   let arr = [1,2,4,2,5,3,3];
 
   describe('Contains', () => {

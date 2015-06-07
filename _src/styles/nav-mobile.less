@@ -1,0 +1,141 @@
+.nav {
+  background-color: @magenta;
+  padding: ~"calc(2rem - 4px)" 2rem;
+
+  &-header {
+    .hamburger {
+      background: url('/images/toggle-open.svg') center center no-repeat;
+      width: 2rem;
+      height: ~"calc(2rem - 4px)";
+      display: block;
+    }
+
+    .logo {
+      display: none;
+      height: ~"calc(2rem - 4px)";
+      img {
+        width: ~"calc(5rem - 10px)";
+      }
+    }
+  }
+
+  &-content {
+    position: absolute;
+    background-color: #fff;
+    top: 5rem;
+    left: 0;
+    width: 80vw;
+    transform: translateX(-81vw);
+    min-height: ~"calc(100vh - 5rem)";
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+
+      li {
+        margin: 0;
+        padding: 0;
+
+        &:hover {
+          cursor: pointer;
+          background-color: @light-gray;
+        }
+
+        a {
+          display: list-item;
+          padding: 0 2rem;
+          font: @d-main-nav;
+        }
+      }
+
+      &.children {
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+
+        li {
+
+          &:hover {
+            color: @magenta;
+          }
+
+          a {
+            font: @d-secondary-nav;
+          }
+        }
+      }
+    }
+
+    > ul {
+      padding: 1rem 0 2rem;
+    }
+
+    &-item {
+      position: relative;
+
+      &.has-children{
+        // Chevron
+        &:after {
+          display: block;
+          content: "";
+          width: 2rem;
+          height: 2rem;
+          background: url("/images/chevron.svg") center center no-repeat;
+          position: absolute;
+          right: 2rem;
+          top: 1rem;
+        }
+
+        &:hover:after {
+          will-change: transform;
+        }
+
+        &.open {
+          &:hover {
+            background-color: transparent;
+          }
+
+          &:after {
+            transform: rotate(180deg);
+            will-change: auto;
+          }
+
+          .children {
+            max-height: 999px;
+          }
+        }
+      }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      padding: 0 2rem 1rem;
+      font: @copyright;
+    }
+  }
+
+  &.open {
+    .nav-header {
+      .hamburger {
+        background: url('/images/toggle-close.svg') center center no-repeat;
+        display: block;
+        float: right;
+      }
+
+      .logo {
+        display: block;
+      }
+    }
+
+    .nav-content {
+      transform: translateX(0);
+    }
+    
+  }
+}

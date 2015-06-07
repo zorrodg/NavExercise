@@ -1,0 +1,114 @@
+.nav {
+  @media @desktop {
+    padding: 0 2rem;
+    white-space: nowrap;
+
+    &-header {
+      display: inline-block;
+      .hamburger {
+        display: none !important;
+      }
+
+      .logo {
+        display: block;
+        padding: 2rem 2rem 0 0;
+        img {
+          width: 5em;
+          height: auto;
+        }
+      }
+    }
+
+    &-content {
+      position: static;
+      display: inline-block;
+      vertical-align: top;
+      background-color: transparent;
+      top: auto;
+      left: auto;
+      width: auto;
+      min-height: 0;
+      transform: translateX(0);
+
+      ul {
+        margin: 0;
+        display: flex;
+
+        li {
+          display: inline-block;
+
+          &:hover {
+            background-color: #fff;
+
+            a {
+              color: @magenta;
+            }
+          }
+
+          a {
+            line-height: 2rem;
+            padding: 2rem;
+            color: #fff;
+          }
+        }
+
+        &.children {
+          margin: 0;
+          position: absolute;
+          display: block;
+          background-color: #fff;
+          z-index: 2;
+
+          li {
+            display: block;
+
+            a {
+              color: #000;
+              padding: 0 2rem;
+
+              &:hover {
+                background-color: @light-gray;
+              }
+            }
+          }
+        }
+      }
+
+      > ul {
+        padding: 0;
+      }
+
+      &-item {
+        &.has-children {
+          &:after {
+            display: none;
+          }
+
+          &:hover {
+            a {
+              color: inherit;
+            }
+
+            > a {
+              color: @magenta;
+            }
+          }
+
+          &.open {
+            .children {
+              padding: 1em 0;
+            }
+            > a {
+              background-color: #fff;
+              color: @magenta;
+            }
+          }
+        }
+      }
+
+      footer {
+        display: none;
+      }
+    }
+  }
+}
