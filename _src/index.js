@@ -50,13 +50,78 @@ function renderTemplate(data) {
 
   nav.innerHTML = template;
 
-  assignNavEvents(nav);
+  assignNavEvents();
 }
 
 /**
- * Using the same cached selector to bind events
- * @param  {HTMLElement} nav Nav element
+ * Bind DOM Events
  */
-function assignNavEvents(nav) {
+function assignNavEvents() {
+  let $mainNav = c('.nav'),
+      $navItems = e('.has-children > a'),
+      cNavItems = c('.has-children'),
+      $hamburger = e('.hamburger'),
+      $maskBackdrop = c('.mask-backdrop'),
+      $mainContainer = c('.main'),
+      resizeInProgress = false;
 
+  $hamburger.off().on('click', e => {
+    $mainNav.toggleClass('open');
+    $maskBackdrop.toggleClass('show')
+                 .height(document.querySelector('body').offsetHeight);
+  }, true);
+
+  $navItems.off().on('click', e => {
+    let target = e.target.nodeName === 'LI' ? c(e.target) : c(e.target.parentNode);
+    e.preventDefault();
+    $maskBackdrop.addClass('show')
+                 .height(document.querySelector('body').offsetHeight);
+
+    closeAll(null, target);
+
+  }, true);
+
+  // Close nav items if resize
+  e(window).on('resize', e => {
+    if (!resizeInProgress) {
+      resizeInProgress = true;
+
+      window.setTimeout(() => {
+        closeAll(true);
+        resizeInProgress = false;
+      }, 500);
+    }
+  })
+  // Close nav when click outside of screens
+  .on('click', e => {
+    let target = e.target.nodeName;
+    if (target !== 'A' && target !== 'LI') {
+      closeAll(true);
+    }
+  });
+
+  function closeAll(mainNav, current) {
+    if ($mainNav.hasClass('open') && mainNav) {
+      $mainNav.removeClass('open');
+    }
+
+    if (current) {
+      let navs = [].slice.call(cNavItems.SELECTORS, 0),
+          currentNode = current.SELECTORS[0];
+
+      for(let nav of navs) {
+        if (nav.isEqualNode(currentNode)) {
+          current.toggleClass('open');
+        } else {
+          c(nav).removeClass('open');  
+        }
+        
+      }
+    } else {
+      cNavItems.removeClass('open');
+      $maskBackdrop.removeClass('show');
+    }
+  }
 }
+
+

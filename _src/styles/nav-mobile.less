@@ -1,18 +1,22 @@
 .nav {
   background-color: @magenta;
-  padding: ~"calc(2rem - 4px)" 2rem;
+  padding: 0;
+  z-index: 3;
+  position: relative;
 
   &-header {
     .hamburger {
       background: url('/images/toggle-open.svg') center center no-repeat;
       width: 2rem;
       height: ~"calc(2rem - 4px)";
+      padding: ~"calc(2rem - 4px)";
       display: block;
     }
 
     .logo {
       display: none;
       height: ~"calc(2rem - 4px)";
+      padding: ~"calc(2rem - 4px)";
       img {
         width: ~"calc(5rem - 10px)";
       }
