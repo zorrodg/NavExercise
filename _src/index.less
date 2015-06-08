@@ -9,7 +9,18 @@ html, body {
   overflow-x: hidden;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .main {
+  transform: translateX(0);
+  transition: .3s transform ease-out;
+  &.open {
+    transform: translateX(80vw);
+    transition: .3s transform ease-out;
+  }
+
   z-index: 1;
 
   h1 {
@@ -36,25 +47,29 @@ html, body {
   }
 
   .mask-backdrop {
-    width: 0;
-    height: 0;
+    width: 100%;
+    height: 100vh;
     opacity: 0;
     background-color: #000;
     position: absolute;
     z-index: 2;
+    transition: .3s opacity linear;
 
     &.show {
-      width: 100%;
-      height: 100vh;
       opacity: .6;
+      transition: .3s opacity linear;
     }
   }
 
   @media @desktop {
+    &.open {
+      transform: translateX(0);
+    }
+
     h1 {
       margin: 0;
       position: absolute;
-      top: 32vw;
+      top: 25vw;
       left: 50%;
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);

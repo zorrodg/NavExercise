@@ -58,36 +58,48 @@ function renderTemplate(data) {
  */
 function assignNavEvents() {
   let $mainNav = c('.nav'),
-      $navItems = e('.has-children > a'),
+      $navItems = e('.has-children'),
+      $childNavItems = e('.has-children .children a'),
       cNavItems = c('.has-children'),
       $hamburger = e('.hamburger'),
       $maskBackdrop = c('.mask-backdrop'),
       $mainContainer = c('.main'),
-      resizeInProgress = false;
+      resizeInProgress = false,
+      windowWidth = 0,
+      backdropTimeout;
 
   $hamburger.off().on('click', e => {
     $mainNav.toggleClass('open');
-    $maskBackdrop.toggleClass('show')
-                 .height(document.querySelector('body').offsetHeight);
+    $mainContainer.toggleClass('open');
+    if ($maskBackdrop.hasClass('show')) {
+      backdropToggle(true);
+    } else {
+      backdropToggle();
+    }
+    
   }, true);
 
   $navItems.off().on('click', e => {
     let target = e.target.nodeName === 'LI' ? c(e.target) : c(e.target.parentNode);
     e.preventDefault();
-    $maskBackdrop.addClass('show')
-                 .height(document.querySelector('body').offsetHeight);
+
+    backdropToggle();
 
     closeAll(null, target);
 
-  }, true);
+  });
+
+  $childNavItems.off().on('click', e => e.stopPropagation());
 
   // Close nav items if resize
   e(window).on('resize', e => {
-    if (!resizeInProgress) {
+    if (!resizeInProgress && windowWidth !== window.innerWidth) {
       resizeInProgress = true;
+      windowWidth = window.innerWidth;
 
       window.setTimeout(() => {
         closeAll(true);
+        $mainContainer.removeClass('open');
         resizeInProgress = false;
       }, 500);
     }
@@ -97,6 +109,7 @@ function assignNavEvents() {
     let target = e.target.nodeName;
     if (target !== 'A' && target !== 'LI') {
       closeAll(true);
+      $mainContainer.removeClass('open');
     }
   });
 
@@ -115,11 +128,29 @@ function assignNavEvents() {
         } else {
           c(nav).removeClass('open');  
         }
-        
       }
+
+      if (!cNavItems.hasClass('open') && window.innerWidth > 768) {
+        backdropToggle(true);
+      }
+
     } else {
       cNavItems.removeClass('open');
+      backdropToggle(true);
+    }
+  }
+
+  function backdropToggle(close) {
+    if (close === true) {
       $maskBackdrop.removeClass('show');
+      window.clearTimeout(backdropTimeout);
+      backdropTimeout = window.setTimeout(() => $maskBackdrop.addClass('hidden'), 600);
+    } else {
+      $maskBackdrop.removeClass('hidden');
+      window.clearTimeout(backdropTimeout);
+      backdropTimeout = window.setTimeout(() => {
+        $maskBackdrop.addClass('show').height(document.querySelector('body').offsetHeight)
+      }, 1);
     }
   }
 }

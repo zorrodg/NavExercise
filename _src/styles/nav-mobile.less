@@ -11,10 +11,16 @@
       height: ~"calc(2rem - 4px)";
       padding: ~"calc(2rem - 4px)";
       display: block;
+      position: absolute;
+      transform: translateX(0);
+      transition: .3s transform ease-out;
     }
 
     .logo {
-      display: none;
+      display: block;
+      transform: translateX(-84vw);
+      transition: .3s transform ease-out;
+      width: 2rem;
       height: ~"calc(2rem - 4px)";
       padding: ~"calc(2rem - 4px)";
       img {
@@ -30,6 +36,7 @@
     left: 0;
     width: 80vw;
     transform: translateX(-81vw);
+    transition: .3s transform ease-out;
     min-height: ~"calc(100vh - 5rem)";
 
     a {
@@ -44,6 +51,7 @@
       li {
         margin: 0;
         padding: 0;
+        -webkit-tap-highlight-color: transparent;
 
         &:hover {
           cursor: pointer;
@@ -93,10 +101,21 @@
           position: absolute;
           right: 2rem;
           top: 1rem;
+          transform: rotate(0deg);
+          transition: .3s transform ease-out .6s;
+          will-change: unset;
         }
 
         &:hover:after {
           will-change: transform;
+        }
+
+        &:hover .children {
+          will-change: contents;
+        }
+
+        .children {
+          transition: .6s all ease-out;
         }
 
         &.open {
@@ -105,12 +124,15 @@
           }
 
           &:after {
-            transform: rotate(180deg);
-            will-change: auto;
+            transform: rotate(-180deg);
+            transition: .3s transform ease-out;
+            will-change: unset;
           }
 
           .children {
-            max-height: 999px;
+            transition: .6s all ease-out;
+            max-height: 100vh;
+            will-change: unset;
           }
         }
       }
@@ -129,15 +151,18 @@
       .hamburger {
         background: url('/images/toggle-close.svg') center center no-repeat;
         display: block;
-        float: right;
+        transform: translateX(84vw);
+        transition: .3s transform ease-out;
       }
 
       .logo {
-        display: block;
+        transform: translateX(0);
+        transition: .3s transform ease-out;
       }
     }
 
     .nav-content {
+      transition: .3s transform ease-out;
       transform: translateX(0);
     }
     

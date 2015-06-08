@@ -11,6 +11,7 @@ class EventRegister {
   constructor (selector) {
     this.events = {};
     this.SELECTORS = selector;
+    this.mobiletouch = 'ontouchstart' in window;
   }
 
   /**
@@ -21,6 +22,9 @@ class EventRegister {
    */
   on(evt, callback, capture = false) {
     if (!u.contains(Object.keys(this.events), evt)) {
+      if (evt = 'click' && this.mobiletouch) {
+        evt = 'touchend';
+      }
       this.events[evt] = callback;
     }
 
@@ -49,6 +53,10 @@ class EventRegister {
       return this;
     }
 
+    if (evt = 'click' && this.mobiletouch) {
+      evt = 'touchend';
+    }
+
     // Remove specific event
     if (u.contains(Object.keys(this.events), evt)) {
       for (let i = 0, len = this.SELECTORS.length; i < len; i++) {
@@ -67,6 +75,10 @@ class EventRegister {
    * @param  {string}   evt      Event name
    */
   trigger(evt) {
+    if (evt = 'click' && this.mobiletouch) {
+      evt = 'touchend';
+    }
+
     if (u.contains(Object.keys(this.events), evt)) {
       for (let i = 0, len = this.SELECTORS.length; i < len; i++) {
         let item = this.SELECTORS[i],

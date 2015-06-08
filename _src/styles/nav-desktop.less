@@ -11,6 +11,8 @@
 
       .logo {
         display: block;
+        transform: translateX(0);
+        width: 5rem;
         padding: 2rem 2rem 2rem 0;
         img {
           width: 5em;
@@ -94,9 +96,14 @@
             }
           }
 
+          .children {
+            transition: .3s all linear;
+          }
+
           &.open {
             .children {
               padding: 1em 0;
+              transition: .3s all linear;
             }
             > a {
               background-color: #fff;
