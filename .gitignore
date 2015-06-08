@@ -32,4 +32,5 @@ node_modules
 
 public/bundle.js
 public/bundle.css
+public/test/tests.js
 public/bundle.map.json
